@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MyApp</title>
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-yellow-300 via-orange-300 via-white to-blue-300 flex items-center justify-center p-4">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center w-full max-w-4xl">
+    <!-- Text area -->
+    <textarea
+      id="output"
+      readonly
+      class="col-span-1 w-full h-32 p-4 border border-gray-300 rounded-lg bg-white text-gray-800 focus:outline-none resize-none"
+      placeholder="Your generated text will appear here..."
+    ></textarea>
+
+    <!-- Whimsy slider -->
+    <div class="col-span-1 flex flex-col items-center space-y-2">
+      <label for="whimsy" class="text-gray-800 font-medium">Whimsy</label>
+      <input
+        id="whimsy"
+        type="range"
+        min="0"
+        max="1"
+        step="0.01"
+        class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+      />
+    </div>
+
+    <!-- Button -->
+    <div class="col-span-1 flex justify-center">
+      <button
+        id="genBtn"
+        class="px-8 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none"
+      >
+        Generate
+      </button>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

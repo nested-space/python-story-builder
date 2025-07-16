@@ -4,7 +4,7 @@ import re
 
 from fastapi import FastAPI, Query, HTTPException
 
-from models import GenerateResponse
+from .models import GenerateResponse
 
 app = FastAPI(
     title="Flash‐Fiction Generator",
@@ -12,10 +12,10 @@ app = FastAPI(
 )
 
 # Load data once at startup
-with open("app/data/templates.json") as f:
+with open("server/data/templates.json") as f:
     TEMPLATES = json.load(f)["templates"]
 
-with open("app/data/placeholders.json") as f:
+with open("server/data/placeholders.json") as f:
     PLACEHOLDERS = json.load(f)
 
 # Simple pronoun map

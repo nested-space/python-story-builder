@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify, request, abort
-from models import generate_flash_fiction
+from models import generate_flash_fiction, replace_markers
 app = Flask(__name__)
 
 @app.route('/')
@@ -20,6 +20,7 @@ def generate():
         silliness=silliness,
         timeout=1.0
     )
+    text = replace_markers(text)
     return jsonify({"text": text})
 
 

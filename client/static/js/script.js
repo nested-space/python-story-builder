@@ -1,17 +1,15 @@
 document.getElementById('genBtn').addEventListener('click', async () => {
-  const btn = document.getElementById('genBtn');
-  const output = document.getElementById('output');
-  const whimsy = document.getElementById('whimsy').value;      // get slider value
+  const btn    = document.getElementById('genBtn');
+  const output = document.getElementById('output');   // now a <div>
+  const whimsy = document.getElementById('whimsy').value;
 
   btn.disabled = true;
   btn.textContent = 'Generating…';
 
-  // AbortController for 5 s timeout
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 5000);
+  const timeoutId  = setTimeout(() => controller.abort(), 5000);
 
   try {
-    // include silliness query param
     const res = await fetch(`/generate?silliness=${encodeURIComponent(whimsy)}`, {
       method: 'GET',
       signal: controller.signal
@@ -19,14 +17,15 @@ document.getElementById('genBtn').addEventListener('click', async () => {
     clearTimeout(timeoutId);
 
     if (!res.ok) throw new Error(res.statusText);
+
     const { text } = await res.json();
-    output.value = text;
+    output.innerHTML = text;          // ⬅️ changed
   } catch (e) {
     if (e.name === 'AbortError') {
-      output.value = "couldn't connect to server";
+      output.innerHTML = "couldn't connect to server";  // ⬅️ changed
     } else {
       console.error(e);
-      output.value = e.message || e;
+      output.innerHTML = e.message || e;                // ⬅️ changed
     }
   } finally {
     btn.disabled = false;

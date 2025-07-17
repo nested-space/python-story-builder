@@ -1,22 +1,182 @@
 html, body {
-  height: 100%;
-  margin: 0;
-  background: linear-gradient(135deg, gold, orange, white, skyblue);
-  font-family: sans-serif;
+    height: 100%;
+    margin: 0;
+    font-family: sans-serif;
 }
+
 .container {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
 }
+
 textarea {
-  width: 300px; height: 100px;
-  resize: none;
-  margin-bottom: 1em;
+    width: 300px;
+    height: 100px;
+    resize: none;
+    margin-bottom: 1em;
 }
+
 button {
-  padding: 0.5em 1em;
-  font-size: 1em;
-  cursor: pointer;
+    padding: 0.5em 1em;
+    font-size: 1em;
+    cursor: pointer;
 }
+
+h1 {
+    color: #9ca3af;
+}
+
+.overlay {
+    background-color: rgb(68, 68, 68, 0.3);
+    height: 100%;
+    width: 100%
+}
+
+mark[marker-type] {
+    margin: 2px 0;
+    display: inline;
+    padding: 0.1em 0.4em;
+    border-radius: 0.8em 0.3em;
+
+    background: transparent linear-gradient(
+            to right,
+            rgba(var(--rgb), 0.1),
+            rgba(var(--rgb), 0.7) 4%,
+            rgba(var(--rgb), 0.3)
+    );
+
+    /* Key lines to fix multi-line breaks */
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+
+    /* Optional: improves line wrapping in some edge cases */
+    line-height: 1.5;
+    overflow-wrap: break-word;
+}
+
+/* Marker-specific colours */
+mark[marker-type="event"] {
+    --rgb: 216, 160, 255;
+}
+
+/* soft violet */
+mark[marker-type="group"] {
+    --rgb: 179, 224, 255;
+}
+
+/* pastel blue */
+mark[marker-type="object"] {
+    --rgb: 255, 210, 168;
+}
+
+/* light peach */
+mark[marker-type="character"] {
+    --rgb: 255, 153, 204;
+}
+
+/* pastel pink */
+mark[marker-type="location"] {
+    --rgb: 255, 153, 204;
+}
+
+/* pastel pink */
+mark[marker-type="phenomenon"] {
+    --rgb: 255, 179, 255;
+}
+
+/* light magenta */
+mark[marker-type="action"] {
+    --rgb: 144, 224, 239;
+}
+
+/* pastel cyan */
+mark[marker-type="belief"] {
+    --rgb: 189, 236, 182;
+}
+
+/* mint green */
+mark[marker-type="truth"] {
+    --rgb: 189, 236, 182;
+}
+
+body.animated-gradient {
+    min-height: 100vh;
+    /* Add first colour again at the end for seamless wrap */
+    background: linear-gradient(
+            270deg,
+            #4facfe 0%,
+            #00f2fe 20%,
+            #ff9a9e 40%,
+            #fad0c4 60%,
+            #fbc2eb 80%,
+            #4facfe 100%
+    );
+    background-size: 600% 600%;
+    animation: gradientFlow 45s linear infinite;
+}
+
+@keyframes gradientFlow {
+    0% {
+        background-position: 0 50%;
+    }
+    100% {
+        /* Shift the gradient two "screens" to the left so the colours line up */
+        background-position: -200% 50%;
+    }
+}
+
+/* ------- Frosted‑glass overlay ------- */
+.overlay {
+    backdrop-filter: blur(8px) saturate(180%);
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    padding: 3rem 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Headings & small text */
+.brand {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+#output {
+    color: #666666;
+    font-weight: 700;
+    text-align: center;
+}
+
+footer {
+    color: #ffffff;
+    font-size: 0.875rem;
+}
+
+body.animated-gradient {
+    background: radial-gradient(
+            circle,
+            rgba(2, 0, 36, 1) 0%,
+            rgba(9, 9, 121, 1) 35%,
+            rgba(71, 5, 110, 1) 100%
+    );
+    backdrop-filter: blur(1000px);
+
+    background-size: 200% 200%;
+    animation: shiftGradient 10s ease-in-out infinite; /* 10s loop */
+}
+
+@keyframes shiftGradient {
+    0% {
+        background-position: 0 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}
+

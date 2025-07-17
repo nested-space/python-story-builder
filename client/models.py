@@ -1,5 +1,6 @@
 from typing import Optional
 import requests
+import re
 
 def generate_flash_fiction(base_url: str, silliness: float = 0.0, timeout: Optional[float] = 5.0) -> str:
     """
@@ -26,3 +27,15 @@ def generate_flash_fiction(base_url: str, silliness: float = 0.0, timeout: Optio
         return payload["text"]
     except (TypeError, KeyError):
         raise ValueError(f"Unexpected response format: {payload!r}")
+
+def replace_markers(text):
+    # Pattern to match {"key"="value"}
+    pattern = r'\{\s*"([^"]+)"\s*=\s*"([^"]+)"\s*\}'
+
+    # Replace each match with <mark marker-type="key">value</mark>
+    def replacer(match):
+        key = match.group(1)
+        value = match.group(2)
+        return f' <mark marker-type="{key}">{value}</mark> '
+
+    return re.sub(pattern, replacer, text)

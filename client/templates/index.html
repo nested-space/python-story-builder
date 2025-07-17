@@ -1,50 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>MyApp</title>
-  <!-- Tabler CSS via CDN -->
-  <link href="https://unpkg.com/@tabler/core@latest/dist/css/tabler.min.css" rel="stylesheet">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Terrible Story Ideas</title>
+
+    <!-- Tabler core CSS from CDN (keeps your existing colour palette) -->
+    <link
+            href="{{ url_for('static', filename='css/tabler.css') }}"
+            rel="stylesheet"
+    />
+    <link
+            href="{{ url_for('static', filename='css/styles.css') }}"
+            rel="stylesheet"
+    />
+
+    <style>
+        /* ------- Infinite flowing gradient (one‑way scroll) ------- */
+
+    </style>
 </head>
-<body class="d-flex align-items-center p-4">
-  <div class="container">
-    <div class="row g-3 justify-content-center">
-      <!-- Text area -->
-      <div class="col-12 col-lg-8">
-        <textarea
-          id="output"
-          readonly
-          class="form-control"
-          style="height: 8rem;"
-          placeholder="Your generated text will appear here...">
-        </textarea>
-      </div>
 
-      <!-- Whimsy slider -->
-      <div class="col-12 col-lg-6 d-flex flex-column align-items-center">
-        <label for="whimsy" class="form-label">Whimsy</label>
-        <input
-          id="whimsy"
-          type="range"
-          min="0"
-          max="1"
-          step="0.01"
-          class="form-range w-100">
-      </div>
+<body class="d-flex flex-column min-vh-100 animated-gradient">
 
-      <!-- Button -->
-      <div class="col-12 d-flex justify-content-center">
-        <button
-          id="genBtn"
-          class="btn btn-primary btn">
-          Generate
-        </button>
-      </div>
+<!-- Main area that should sit dead‑centre -->
+<main class="flex-grow-1 d-flex justify-content-center align-items-center">
+    <div class="container-xl m-4">
+
+        <header class="mb-4 text-center">
+            <span class="brand">Terrible Story Ideas</span>
+        </header>
+
+        <div class="row row-cards justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="card border border-red p-4">
+                    <h2 id="output" class="mb-4">Let’s get creative!</h2>
+
+                    <!-- Whimsy slider -->
+                    <label for="whimsy" class="form-label fw-bold">Whimsy</label>
+                    <input id="whimsy" type="range" value="0" min="0" max="1" step="0.1"
+                           class="form-range mb-4"/>
+
+                    <!-- Generate button -->
+                    <button id="genBtn" class="btn btn-primary btn-lg w-100">
+                        <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="icon icon-tabler icon-tabler-sparkles me-1"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                stroke-width="2"
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        >
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path
+                                    d="M12 3l1.664 3.36l3.712 .54l-2.688 2.608l.636 3.704l-3.324 -1.748l-3.324 1.748l.636 -3.704l-2.688 -2.608l3.712 -.54z"
+                            />
+                            <path
+                                    d="M5 16l.9 1.8l1.978 .288l-1.439 1.397l.34 1.976l-1.777 -.933l-1.777 .933l.34 -1.976l-1.439 -1.397l1.978 -.288z"
+                            />
+                            <path
+                                    d="M18 14l1.2 2.4l2.637 .384l-1.919 1.863l.454 2.621l-2.372 -1.247l-2.372 1.247l.454 -2.621l-1.919 -1.863l2.637 -.384z"
+                            />
+                        </svg>
+                        Generate
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+</main>
 
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-  <!-- Tabler JS -->
-  <script src="https://unpkg.com/@tabler/core@latest/dist/js/tabler.min.js"></script>
+<!-- Footer now stays at the bottom, outside the centring context -->
+<footer class="text-center py-3 small">
+    &copy; <span id="year"></span> Terrible Story Ideas. All rights reserved.
+</footer>
+
+<!-- ===== Scripts ===== -->
+<script>
+    // Update footer year automatically
+    document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/tabler.js') }}"></script>
 </body>
 </html>

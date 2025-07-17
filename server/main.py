@@ -52,7 +52,7 @@ def generate(silliness: float = Query(
                 pool = serious_list if pick_serious else comical_list
             else:
                 pool = serious_list
-            return random.choice(pool)
+            return f'{{"{key}"="{random.choice(pool)}"}}'
         # unknown—leave as is
         return match.group(0)
 
